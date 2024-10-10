@@ -41,8 +41,14 @@ struct ContentView: View {
                 
             }
         } detail: {
-            Text(selection.rawValue).italic()
+            switch selection {
+            case .today:
+                TodayView()
+            case .archive, .settings:
+                Text(selection.rawValue).italic()
+            }
         }
+        .navigationTitle(selection.rawValue)
     }
 }
 

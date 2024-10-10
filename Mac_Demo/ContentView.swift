@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-enum SideBarViews: String, CaseIterable {
+enum SideBarView: String, CaseIterable {
     case today = "Today"
     case archive = "Archive"
     case settings = "Settings"
@@ -26,17 +26,13 @@ enum SideBarViews: String, CaseIterable {
 }
 
 struct ContentView: View {
+    let sidebars : [SideBarView] = SideBarView.allCases
+    @State private var selection: SideBarView = .today
 
     var body: some View {
         NavigationSplitView {
-            List {
-                ForEach(SideBarViews.allCases, id: \.self) { view in
-                    NavigationLink {
-                        Text(view.rawValue).italic()
-                    } label: {
-                        Label(view.rawValue, systemImage: view.labelImage)
-                    }
-                }
+            List(sidebars, id: \.self, selection: $selection) { view in
+                Label(view.rawValue, systemImage: view.labelImage)
             }
             .listStyle(SidebarListStyle())
             .frame(minWidth: 200, idealWidth: 250, maxWidth: 300)
@@ -45,7 +41,7 @@ struct ContentView: View {
                 
             }
         } detail: {
-            Text("Select an item")
+            Text(selection.rawValue).italic()
         }
     }
 }

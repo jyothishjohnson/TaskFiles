@@ -8,22 +8,41 @@
 import SwiftUI
 import SwiftData
 
+enum SideBarViews: String, CaseIterable {
+    case today = "Today"
+    case archive = "Archive"
+    case settings = "Settings"
+    
+    var labelImage: String {
+        switch self {
+        case .today:
+            "list.bullet.clipboard"
+        case .archive:
+            "archivebox"
+        case .settings:
+            "gear"
+        }
+    }
+}
+
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
-
+    @State private var selection: String? = "Inbox"
+    
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items) { item in
+                ForEach(SideBarViews.allCases, id: \.self) { view in
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        Text(view.rawValue).italic()
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        Label(view.rawValue, systemImage: view.labelImage)
                     }
                 }
-                .onDelete(perform: deleteItems)
             }
+            .listStyle(SidebarListStyle())
+            .frame(minWidth: 200, idealWidth: 250, maxWidth: 300)
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
             .toolbar {
                 ToolbarItem {

@@ -21,6 +21,7 @@ struct TodayView: View {
         VStack {
             List(todayTasks.tasks) { task in
                 TaskView(task: task)
+                    .listRowSeparator(.hidden)
             }
             HStack {
                 Image(systemName: "plus.circle.fill")
@@ -97,13 +98,18 @@ struct TaskView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(task.name.capitalized)
-                    .font(.title)
-                    .fontWeight(.heavy)
+                Text(task.name.uppercased())
+                    .font(.title2)
+                    .fontWeight(.semibold)
                 Spacer()
             }
             ForEach(task.fileNames, id: \.self) { file in
-                Text(file)
+                HStack {
+                    Text(file)
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                }
             }
             
             Rectangle()
@@ -132,5 +138,12 @@ struct TaskView: View {
                 }
         }
         .padding()
+        .background(Color(.windowBackgroundColor).opacity(0.5))
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+        )
+        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
     }
 }

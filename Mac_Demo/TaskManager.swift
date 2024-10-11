@@ -30,6 +30,7 @@ class TaskManager {
         }
     }
     
+    @discardableResult
     func createTask(name: String) -> Bool {
         guard let myTasksDirectory = myTasksDirectory else {
             print("MyTasks directory not set up")

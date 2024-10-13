@@ -15,9 +15,15 @@ struct DropFilesOpaqueView: View {
     @State private var isTargeted = false
     
     var body: some View {
-        Rectangle()
-            .fill(isTargeted ? Color.green.opacity(0.3) : Color.clear)
+        RoundedRectangle(cornerRadius: 12)
+            .fill(isTargeted ? Color.blue.opacity(0.1) : Color.clear)
             .frame(height: 100)
+            .overlay {
+                if !isTargeted && task.fileNames.isEmpty {
+                    Text("Drop your files here")
+                        .foregroundStyle(.gray)
+                }
+            }
             .onDrop(of: [UTType.fileURL.identifier], isTargeted: $isTargeted) { providers -> Bool in
                 let _ = providers.first?.loadObject(ofClass: URL.self) { item, error in
                     guard let url = item else { return }

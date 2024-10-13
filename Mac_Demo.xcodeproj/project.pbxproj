@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FD17EA182CBBD5C500AC0676 /* FilesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD17EA172CBBD5C500AC0676 /* FilesGridView.swift */; };
+		FD17EA1A2CBBDB1500AC0676 /* DropFilesOpaqueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD17EA192CBBDB1500AC0676 /* DropFilesOpaqueView.swift */; };
 		FD2C24342CB7BCB0005CD926 /* Mac_DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C24332CB7BCB0005CD926 /* Mac_DemoApp.swift */; };
 		FD2C24362CB7BCB0005CD926 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C24352CB7BCB0005CD926 /* ContentView.swift */; };
 		FD2C243A2CB7BCB1005CD926 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD2C24392CB7BCB1005CD926 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		FD17EA172CBBD5C500AC0676 /* FilesGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesGridView.swift; sourceTree = "<group>"; };
+		FD17EA192CBBDB1500AC0676 /* DropFilesOpaqueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropFilesOpaqueView.swift; sourceTree = "<group>"; };
 		FD2C24302CB7BCB0005CD926 /* Mac_Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mac_Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD2C24332CB7BCB0005CD926 /* Mac_DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mac_DemoApp.swift; sourceTree = "<group>"; };
 		FD2C24352CB7BCB0005CD926 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				FD2C243B2CB7BCB1005CD926 /* Preview Content */,
 				FD2C24622CB7E7B5005CD926 /* TaskManager.swift */,
 				FD17EA172CBBD5C500AC0676 /* FilesGridView.swift */,
+				FD17EA192CBBDB1500AC0676 /* DropFilesOpaqueView.swift */,
 			);
 			path = Mac_Demo;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			files = (
 				FD2C24362CB7BCB0005CD926 /* ContentView.swift in Sources */,
 				FD2C24612CB7E0F5005CD926 /* TodayView.swift in Sources */,
+				FD17EA1A2CBBDB1500AC0676 /* DropFilesOpaqueView.swift in Sources */,
 				FD17EA182CBBD5C500AC0676 /* FilesGridView.swift in Sources */,
 				FD2C24632CB7E7B5005CD926 /* TaskManager.swift in Sources */,
 				FD2C24342CB7BCB0005CD926 /* Mac_DemoApp.swift in Sources */,

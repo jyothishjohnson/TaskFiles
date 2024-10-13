@@ -79,7 +79,7 @@ class Task: Identifiable {
     let id = UUID()
     private(set) var name: String
     private(set) var isArchived: Bool
-    private(set) var fileNames: [String]
+    private(set) var fileNames: Set<String>
     
     init(name: String, isArchived: Bool = false) {
         self.name = name
@@ -87,15 +87,14 @@ class Task: Identifiable {
         self.fileNames = []
     }
     
-    func addFileName(_ fileName: String) {
-        fileNames.append(fileName)
+    func addFileName(_ fileName: String) -> Bool {
+        return fileNames.insert(fileName).inserted
     }
 }
 
 struct TaskView: View {
     @State var task: Task
     @State private var isTargeted = false
-    @State private var selectedFile: String?
     
     var body: some View {
         VStack {
@@ -104,36 +103,17 @@ struct TaskView: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                 Spacer()
+                Image(systemName: "plus.circle.fill")
+                    .foregroundColor(.blue)
+                    .font(.system(size: 20))
             }
             if !task.fileNames.isEmpty {
                 FilesGridView(task: task)
             }
             
-            Rectangle()
-                .fill(isTargeted ? Color.green.opacity(0.3) : Color.gray.opacity(0.3))
-                .frame(height: 100)
-                .overlay(
-                    Text("Drop files here")
-                        .foregroundColor(.secondary)
-                )
-                .onDrop(of: [UTType.fileURL.identifier], isTargeted: $isTargeted) { providers -> Bool in
-                    let _ = providers.first?.loadObject(ofClass: URL.self) { item, error in
-                        guard let url = item else { return }
-                        
-                        do {
-                            let fileContent = try Data(contentsOf: url)
-                            let fileName = url.lastPathComponent
-                            
-                            if TaskManager.shared.addFile(to: task.name, fileName: fileName, fileContent: fileContent) {
-                                task.addFileName(fileName)
-                            }
-                        } catch {
-                            print("Error reading file: \(error.localizedDescription)")
-                        }
-                    }
-                    return true
-                }
+            DropFilesOpaqueView(task: task)
         }
+//        .frame(height: 120)
         .padding()
         .background(Color(.windowBackgroundColor).opacity(0.5))
         .cornerRadius(12)

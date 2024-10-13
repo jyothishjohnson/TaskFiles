@@ -48,6 +48,7 @@ class TaskManager {
         }
     }
     
+    @discardableResult
     func addFile(to taskName: String, fileName: String, fileContent: Data) -> Bool {
         guard let myTasksDirectory = myTasksDirectory else {
             print("MyTasks directory not set up")

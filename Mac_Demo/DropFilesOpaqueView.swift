@@ -33,7 +33,10 @@ struct DropFilesOpaqueView: View {
                         let fileName = url.lastPathComponent
                         
                         if task.addFileName(fileName) {
-                            TaskManager.shared.addFile(to: task.name, fileName: fileName, fileContent: fileContent)
+                            let addInfo = TaskManager.shared.addFile(to: task.name, fileName: fileName, fileContent: fileContent)
+                            if addInfo.isAdded, let path = addInfo.path {
+                                task.addFilePath(path, for: fileName)
+                            }
                         }
 
                     } catch {

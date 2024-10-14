@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
+import AppKit
 
 struct FilesGridView: View {
     
@@ -19,30 +21,52 @@ struct FilesGridView: View {
     
     var body: some View {
         LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
-            ForEach(task.fileNames.sorted(), id: \.self) { file in
+            ForEach(task.fileNames.sorted(), id: \.self) { fileName in
                 VStack {
-                    FileIconView(fileName: file)
+                    FileIconView(fileName: fileName)
                         .frame(width: 64, height: 64)
-                    Text(file)
+                    Text(fileName)
                         .font(.caption)
                         .lineLimit(1)
                         .truncationMode(.middle)
                 }
                 .padding(4)
-                .background(selectedFile == file ? Color.blue.opacity(0.2) : Color.clear)
+                .background(selectedFile == fileName ? Color.blue.opacity(0.2) : Color.clear)
                 .cornerRadius(8)
-                .onTapGesture {
-                    if selectedFile == file {
-                        selectedFile = nil
-                        print("Deselected file: \(file)")
-                    } else {
-                        selectedFile = file
-                        print("Selected file: \(file)")
-                    }
-                }
+                .gesture(getGesture(for: fileName))
             }
         }
         .padding(.vertical, 8)
+    }
+    
+    private func getGesture(for fileName: String) -> some Gesture {
+        TapGesture(count: 2)
+            .onEnded {
+                openFile(fileName)
+                print("Double tap")
+            }
+            .simultaneously(with: TapGesture(count: 1)
+                .onEnded {
+                    print("Single Tap")
+                    if selectedFile == fileName {
+                        selectedFile = nil
+                        print("Deselected file: \(fileName)")
+                    } else {
+                        selectedFile = fileName
+                        print("Selected file: \(fileName)")
+                    }
+                })
+    }
+    
+    private func openFile(_ fileName: String) {
+        guard let filePath = task.filePaths[fileName] else {
+            print("File path not found for: \(fileName)")
+            return
+        }
+        
+        let didOpen = NSWorkspace.shared.open(URL(fileURLWithPath: filePath))
+        print("File opening initiated: \(fileName)")
+        print("File Opening success:", didOpen)
     }
 }
 

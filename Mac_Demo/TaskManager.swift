@@ -49,10 +49,10 @@ class TaskManager {
     }
     
     @discardableResult
-    func addFile(to taskName: String, fileName: String, fileContent: Data) -> Bool {
+    func addFile(to taskName: String, fileName: String, fileContent: Data) -> (isAdded:Bool, path: String?) {
         guard let myTasksDirectory = myTasksDirectory else {
             print("MyTasks directory not set up")
-            return false
+            return (false, nil)
         }
         
         let taskFolderURL = myTasksDirectory.appendingPathComponent(taskName)
@@ -61,10 +61,10 @@ class TaskManager {
         do {
             try fileContent.write(to: fileURL)
             print("File added successfully: \(fileURL.path)")
-            return true
+            return (true, fileURL.path)
         } catch {
             print("Error adding file: \(error.localizedDescription)")
-            return false
+            return (false, nil)
         }
     }
 }

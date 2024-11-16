@@ -22,12 +22,38 @@ struct TodayView: View {
             List(todayTasks.tasks) { task in
                 TaskView(task: task)
             }
-            TextField("What's on your mind?!!", text: $newTaskName)
-                .onSubmit {
-                    addTask()
-                }
-                .padding(8)
-                .padding(.bottom, 4)
+            HStack {
+                Image(systemName: "plus.circle.fill")
+                    .foregroundColor(.blue)
+                    .font(.system(size: 20))
+                TextField("What's on your mind?!!", text: $newTaskName)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .font(.system(size: 14))
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color(.textBackgroundColor))
+                            .shadow(color: .gray.opacity(0.2), radius: 3, x: 0, y: 2)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                    )
+                    .onSubmit {
+                        addTask()
+                    }
+                Image(systemName: "paperplane.fill")
+                    .foregroundColor(.blue)
+                    .font(.system(size: 20))
+                    .rotationEffect(Angle(degrees: 45))
+                    .onTapGesture {
+                        addTask()
+                    }
+            }
+            .padding(.top, 4)
+            .padding(.horizontal, 16)
+            .padding(.bottom, 16)
         }
     }
 
@@ -37,6 +63,7 @@ struct TodayView: View {
             let newTask = Task(name: trimmedName)
             todayTasks.tasks.append(newTask)
             TaskManager.shared.createTask(name: newTask.name)
+            newTaskName = ""
         }
     }
 }
@@ -69,8 +96,12 @@ struct TaskView: View {
     
     var body: some View {
         VStack {
-            Text(task.name)
-                .font(.title)
+            HStack {
+                Text(task.name.capitalized)
+                    .font(.title)
+                    .fontWeight(.heavy)
+                Spacer()
+            }
             ForEach(task.fileNames, id: \.self) { file in
                 Text(file)
             }

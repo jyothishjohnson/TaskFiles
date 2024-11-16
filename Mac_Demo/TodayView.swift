@@ -95,6 +95,11 @@ class Task: Identifiable {
 struct TaskView: View {
     @State var task: Task
     @State private var isTargeted = false
+
+    // Define the grid layout
+    private let columns = [
+        GridItem(.adaptive(minimum: 80, maximum: 120), spacing: 16)
+    ]
     
     var body: some View {
         VStack {
@@ -104,15 +109,20 @@ struct TaskView: View {
                     .fontWeight(.semibold)
                 Spacer()
             }
-            ForEach(task.fileNames, id: \.self) { file in
-                HStack {
-                    FileIconView(fileName: file)
-                        .frame(width: 32, height: 32)
-                    Text(file)
-                        .font(.headline)
-                        .foregroundColor(.secondary)
-                    Spacer()
+            if !task.fileNames.isEmpty {
+                LazyVGrid(columns: columns, alignment: .leading, spacing: 16) {
+                    ForEach(task.fileNames, id: \.self) { file in
+                        VStack {
+                            FileIconView(fileName: file)
+                                .frame(width: 64, height: 64)
+                            Text(file)
+                                .font(.caption)
+                                .lineLimit(1)
+                                .truncationMode(.middle)
+                        }
+                    }
                 }
+                .padding(.vertical, 8)
             }
             
             Rectangle()

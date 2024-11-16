@@ -107,13 +107,16 @@ struct TaskView: View {
                     .foregroundColor(.blue)
                     .font(.system(size: 20))
             }
-            if !task.fileNames.isEmpty {
-                FilesGridView(task: task)
+            ZStack {
+                if !task.fileNames.isEmpty {
+                    FilesGridView(task: task)
+                } else {
+                    Spacer()
+                        .frame(height: 80)
+                }
+                DropFilesOpaqueView(task: task)
             }
-            
-            DropFilesOpaqueView(task: task)
         }
-//        .frame(height: 120)
         .padding()
         .background(Color(.windowBackgroundColor).opacity(0.5))
         .cornerRadius(12)

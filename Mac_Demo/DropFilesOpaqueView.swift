@@ -17,7 +17,7 @@ struct DropFilesOpaqueView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 12)
             .fill(isTargeted ? Color.blue.opacity(0.1) : Color.clear)
-            .frame(height: 100)
+            .frame(minHeight: 100)
             .overlay {
                 if !isTargeted && task.fileNames.isEmpty {
                     Text("Drop your files here")

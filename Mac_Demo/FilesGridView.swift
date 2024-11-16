@@ -14,11 +14,11 @@ struct FilesGridView: View {
     
     // Define the grid layout
     private let columns = [
-        GridItem(.adaptive(minimum: 80, maximum: 120), spacing: 16)
+        GridItem(.adaptive(minimum: 80, maximum: 120), spacing: 8)
     ]
     
     var body: some View {
-        LazyVGrid(columns: columns, alignment: .leading, spacing: 16) {
+        LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
             ForEach(task.fileNames.sorted(), id: \.self) { file in
                 VStack {
                     FileIconView(fileName: file)

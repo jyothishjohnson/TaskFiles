@@ -80,15 +80,21 @@ class Task: Identifiable {
     private(set) var name: String
     private(set) var isArchived: Bool
     private(set) var fileNames: Set<String>
+    private(set) var filePaths: [String:String]
     
     init(name: String, isArchived: Bool = false) {
         self.name = name
         self.isArchived = isArchived
         self.fileNames = []
+        self.filePaths = [:]
     }
     
     func addFileName(_ fileName: String) -> Bool {
         return fileNames.insert(fileName).inserted
+    }
+    
+    func addFilePath(_ path: String, for fileName: String) {
+        filePaths[fileName] = path
     }
 }
 

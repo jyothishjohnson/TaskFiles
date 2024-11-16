@@ -9,6 +9,24 @@ import SwiftUI
 import UniformTypeIdentifiers
 import AppKit
 
+struct FileItem: Transferable {
+    let url: URL
+    
+    static var transferRepresentation: some TransferRepresentation {
+        FileRepresentation(contentType: .fileURL) { file in
+            SentTransferredFile(file.url)
+        } importing: { received in
+            let copy = URL(fileURLWithPath: received.file.lastPathComponent)
+            do {
+                try FileManager.default.copyItem(at: received.file, to: copy)
+            } catch (let error) {
+                print("###", error.localizedDescription)
+            }
+            return Self.init(url: copy)
+        }
+    }
+}
+
 struct FilesGridView: View {
     
     @State var task: Task
@@ -34,6 +52,10 @@ struct FilesGridView: View {
                 .background(selectedFile == fileName ? Color.blue.opacity(0.2) : Color.clear)
                 .cornerRadius(8)
                 .gesture(getGesture(for: fileName))
+                .draggable(FileItem(url: fileURL(for: fileName))) {
+                    FileIconView(fileName: fileName)
+                        .frame(width: 32, height: 32)
+                }
             }
         }
         .padding(.vertical, 8)
@@ -67,6 +89,13 @@ struct FilesGridView: View {
         let didOpen = NSWorkspace.shared.open(URL(fileURLWithPath: filePath))
         print("File opening initiated: \(fileName)")
         print("File Opening success:", didOpen)
+    }
+    
+    private func fileURL(for fileName: String) -> URL {
+        guard let filePath = task.filePaths[fileName] else {
+            fatalError("File path not found for: \(fileName)")
+        }
+        return URL(fileURLWithPath: filePath)
     }
 }
 

@@ -19,7 +19,7 @@ struct FilesGridView: View {
     
     var body: some View {
         LazyVGrid(columns: columns, alignment: .leading, spacing: 16) {
-            ForEach(task.fileNames, id: \.self) { file in
+            ForEach(task.fileNames.sorted(), id: \.self) { file in
                 VStack {
                     FileIconView(fileName: file)
                         .frame(width: 64, height: 64)

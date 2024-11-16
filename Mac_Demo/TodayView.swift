@@ -20,6 +20,8 @@ struct TodayView: View {
                 .onSubmit {
                     addTask()
                 }
+                .padding(8)
+                .padding(.bottom, 4)
         }
     }
 
@@ -28,8 +30,8 @@ struct TodayView: View {
         if !trimmedName.isEmpty {
             let newTask = Task(name: trimmedName)
             tasks.append(newTask)
-            newTaskName = ""
-        }        
+            TaskManager.shared.createTask(name: newTask.name)
+        }
     }
 }
 

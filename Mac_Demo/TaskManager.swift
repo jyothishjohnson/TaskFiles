@@ -18,11 +18,8 @@ class TaskManager {
     }
     
     private func setupMyTasksDirectory() {
-        guard let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            print("Unable to access Documents directory")
-            return
-        }
-        
+        let homeDirectory = fileManager.homeDirectoryForCurrentUser
+        let documentsDirectory = homeDirectory.appendingPathComponent("Documents")
         myTasksDirectory = documentsDirectory.appendingPathComponent("MyTasks")
         
         do {
@@ -40,7 +37,6 @@ class TaskManager {
         }
         
         let taskFolderURL = myTasksDirectory.appendingPathComponent(name)
-        
         do {
             try fileManager.createDirectory(at: taskFolderURL, withIntermediateDirectories: true, attributes: nil)
             print("Task folder created successfully: \(taskFolderURL.path)")

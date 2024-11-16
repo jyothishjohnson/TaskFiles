@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		FD2C24342CB7BCB0005CD926 /* Mac_DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C24332CB7BCB0005CD926 /* Mac_DemoApp.swift */; };
 		FD2C24362CB7BCB0005CD926 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C24352CB7BCB0005CD926 /* ContentView.swift */; };
-		FD2C24382CB7BCB0005CD926 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C24372CB7BCB0005CD926 /* Item.swift */; };
 		FD2C243A2CB7BCB1005CD926 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD2C24392CB7BCB1005CD926 /* Assets.xcassets */; };
 		FD2C243D2CB7BCB1005CD926 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD2C243C2CB7BCB1005CD926 /* Preview Assets.xcassets */; };
 		FD2C24482CB7BCB1005CD926 /* Mac_DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2C24472CB7BCB1005CD926 /* Mac_DemoTests.swift */; };
@@ -38,7 +37,6 @@
 		FD2C24302CB7BCB0005CD926 /* Mac_Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mac_Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD2C24332CB7BCB0005CD926 /* Mac_DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mac_DemoApp.swift; sourceTree = "<group>"; };
 		FD2C24352CB7BCB0005CD926 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		FD2C24372CB7BCB0005CD926 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FD2C24392CB7BCB1005CD926 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD2C243C2CB7BCB1005CD926 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FD2C243E2CB7BCB1005CD926 /* Mac_Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mac_Demo.entitlements; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 			children = (
 				FD2C24332CB7BCB0005CD926 /* Mac_DemoApp.swift */,
 				FD2C24352CB7BCB0005CD926 /* ContentView.swift */,
-				FD2C24372CB7BCB0005CD926 /* Item.swift */,
 				FD2C24392CB7BCB1005CD926 /* Assets.xcassets */,
 				FD2C243E2CB7BCB1005CD926 /* Mac_Demo.entitlements */,
 				FD2C243B2CB7BCB1005CD926 /* Preview Content */,
@@ -263,7 +260,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD2C24362CB7BCB0005CD926 /* ContentView.swift in Sources */,
-				FD2C24382CB7BCB0005CD926 /* Item.swift in Sources */,
 				FD2C24342CB7BCB0005CD926 /* Mac_DemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UniformTypeIdentifiers
+import AppKit
 
 @Observable
 class TodayTasks {
@@ -105,6 +106,8 @@ struct TaskView: View {
             }
             ForEach(task.fileNames, id: \.self) { file in
                 HStack {
+                    FileIconView(fileName: file)
+                        .frame(width: 32, height: 32)
                     Text(file)
                         .font(.headline)
                         .foregroundColor(.secondary)
@@ -145,5 +148,29 @@ struct TaskView: View {
                 .stroke(Color.gray.opacity(0.2), lineWidth: 1)
         )
         .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+    }
+}
+
+struct FileIconView: View {
+    let fileName: String
+    
+    var body: some View {
+        Image(nsImage: getIconForFile(fileName: fileName))
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+    }
+    
+    private func getIconForFile(fileName: String) -> NSImage {
+        let workspace = NSWorkspace.shared
+        let icon: NSImage
+        
+        let fileExtension = URL(fileURLWithPath: fileName).pathExtension
+        if let fileType = UTType(filenameExtension: fileExtension) {
+            icon = workspace.icon(for: fileType)
+        } else {
+            icon = workspace.icon(forFile: "public.data")
+        }
+        
+        return icon
     }
 }
